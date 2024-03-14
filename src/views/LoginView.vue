@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import router from '@/router';
+// import router from '@/router';
 import UserService from '@/services/UserService';
 import { ref, computed } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
@@ -14,20 +14,20 @@ const changeButtonState: ComputedRef<boolean> = computed(() => {
   return email.value.trim() !== '' && password.value.trim() !== '';
 });
 
-const submit = async() => {
-    clearErrors();
-    const keys = {
-        email: email.value,
-        password: password.value
-    };
-    let response = await service.login(keys);
-    // if(response = true){
-    //     router.push('/home')
-    // }
-    // else{
-    //     errors.value.push({ field: 'fail', message: 'El correo no ha sido registrado o la contraseña es incorrecta' });
-    // }
-    console.log(response)
+const submit = async () => {
+  clearErrors();
+  const keys = {
+    email: email.value,
+    password: password.value
+  };
+  let response = await service.login(keys);
+  // if(response = true){
+  //     router.push('/home')
+  // }
+  // else{
+  //     errors.value.push({ field: 'fail', message: 'El correo no ha sido registrado o la contraseña es incorrecta' });
+  // }
+  console.log(response)
 }
 
 const clearErrors = () => {
@@ -48,8 +48,8 @@ const clearErrors = () => {
         <input v-model="password" type="password" required />
       </div>
       <span v-if="errors.some(error => error.field === 'fail')" class="error">
-          {{ errors.find(error => error.field === 'fail')?.message }}
-        </span>
+        {{ errors.find(error => error.field === 'fail')?.message }}
+      </span>
       <div>
         <button type="submit" :disabled="!changeButtonState">Ingresar</button>
       </div>
@@ -64,6 +64,7 @@ const clearErrors = () => {
   text-align: center;
   margin: 0 .5rem;
   padding: 1rem;
+
 
   & h1 {
     font-size: 2rem;

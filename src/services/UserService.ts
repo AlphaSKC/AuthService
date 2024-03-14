@@ -76,6 +76,8 @@ export default class UserService {
                 },
                 body:JSON.stringify(keys)
             })
+            const response = await json.json()
+            console.log(response)
         }
         catch(error){
             console.log('Error login')    

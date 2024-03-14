@@ -25,7 +25,7 @@ const submit = async () => {
         group: 'IDYGS82'
     };
     await service.createUser(user);
-    router.push('/home');
+    router.push({ name: 'home' });
 }
 
 const validateForm = () => {

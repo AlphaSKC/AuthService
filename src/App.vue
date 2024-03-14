@@ -1,31 +1,30 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import router from './router';
-import { useRoute } from 'vue-router';
-const route = useRoute()
-const isDiagonal = route.path == '/'
-
-console.log(isDiagonal)
 </script>
 
 <template>
   <div class="container">
     <header>
-      <div class="wrapper" v-if="isDiagonal">
+      <div>
         <nav>
-          <RouterLink to="/home">
-            <button class="btnHome">
+          <RouterLink :to="{ name: 'home' }">
+            <button data-content="Home">
               Home
             </button>
           </RouterLink>
-          <RouterLink to="/blog">
-            <button class="btnBlog">
+          <RouterLink :to="{ name: 'blog' }">
+            <button data-content="Blog">
               Blog
             </button>
           </RouterLink>
-          <RouterLink to="/register">
-            <button class="btnRegister">
+          <RouterLink :to="{ name: 'register' }">
+            <button data-content="Register">
               Register
+            </button>
+          </RouterLink>
+          <RouterLink :to="{ name: 'login' }">
+            <button data-content="Salir">
+              Salir
             </button>
           </RouterLink>
         </nav>
@@ -37,6 +36,18 @@ console.log(isDiagonal)
 </template>
 
 <style scoped>
+.container {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  width: 100%;
+}
+
 nav {
   display: flex;
   width: 100%;
@@ -44,12 +55,8 @@ nav {
   justify-content: space-evenly;
 }
 
-.btnHome,
-.btnBlog,
-.btnRegister,
-.btnHome::after,
-.btnBlog::after,
-.btnRegister::after {
+button,
+button::after {
   padding: 10px 50px;
   font-size: 20px;
   border: none;
@@ -59,7 +66,7 @@ nav {
   position: relative;
 }
 
-.btnHome::after {
+button::after {
   --move1: inset(50% 50% 50% 50%);
   --move2: inset(31% 0 40% 0);
   --move3: inset(39% 0 15% 0);
@@ -67,7 +74,7 @@ nav {
   --move5: inset(45% 0 6% 0);
   --move6: inset(14% 0 61% 0);
   clip-path: var(--move1);
-  content: 'Home';
+  content: attr(data-content);
   position: absolute;
   top: 0;
   left: 0;
@@ -76,44 +83,7 @@ nav {
   display: block;
 }
 
-.btnBlog::after {
-  --move1: inset(50% 50% 50% 50%);
-  --move2: inset(31% 0 40% 0);
-  --move3: inset(39% 0 15% 0);
-  --move4: inset(45% 0 40% 0);
-  --move5: inset(45% 0 6% 0);
-  --move6: inset(14% 0 61% 0);
-  clip-path: var(--move1);
-  content: 'Blog';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-}
-
-.btnRegister::after {
-  --move1: inset(50% 50% 50% 50%);
-  --move2: inset(31% 0 40% 0);
-  --move3: inset(39% 0 15% 0);
-  --move4: inset(45% 0 40% 0);
-  --move5: inset(45% 0 6% 0);
-  --move6: inset(14% 0 61% 0);
-  clip-path: var(--move1);
-  content: 'Register';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-}
-
-
-.btnHome:hover::after,
-.btnBlog:hover::after,
-.btnRegister:hover::after {
+button:hover::after {
   animation: glitch 1s;
   text-shadow: 10 10px 10px black;
   animation-timing-function: steps(2, end);
@@ -122,9 +92,7 @@ nav {
   border: 3px solid rgb(0, 255, 213);
 }
 
-.btnHome:hover,
-.btnBlog:hover,
-.btnRegister:hover {
+button:hover {
   text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #E94BE8;
   background-color: transparent;
   border: 1px solid rgb(0, 255, 213);
