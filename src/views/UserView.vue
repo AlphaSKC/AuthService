@@ -8,7 +8,7 @@ const user = service.getUser()
 
 onMounted(async () => {
     const router = useRoute()
-    const userId = router.params.id as string
+    const userId = router.params.email as string
     await service.fetchUser(userId)
 })
 
@@ -25,13 +25,11 @@ onMounted(async () => {
                 </svg>
             </div>
             <p class="name-client"> {{ user.name }}
-                <span>{{ user.website }}
+                <span>{{ user.group }}
                 </span>
             </p>
             <p class="name-client"> Contacto:
                 <span>{{ user.email }}
-                </span>
-                <span>{{ user.phone }}
                 </span>
             </p>
             <div class="social-media">

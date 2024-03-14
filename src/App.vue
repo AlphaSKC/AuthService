@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import router from './router';
+import { useRoute } from 'vue-router';
+const route = useRoute()
+const isDiagonal = route.path == '/'
+
+console.log(isDiagonal)
 </script>
 
 <template>
   <div class="container">
     <header>
-      <div class="wrapper">
+      <div class="wrapper" v-if="isDiagonal">
         <nav>
-          <RouterLink to="/">
+          <RouterLink to="/home">
             <button class="btnHome">
               Home
             </button>

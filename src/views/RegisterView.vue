@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import type IUser from '@/interfaces/IUser';
+import router from '@/router';
 import UserService from '@/services/UserService';
 import { onMounted, ref, type ComputedRef, type Ref, computed } from 'vue';
 
@@ -11,7 +11,6 @@ const confirmPassword: Ref<string> = ref('');
 const errors: Ref<Array<{ field: string; message: string }>> = ref([]);
 
 const service = new UserService();
-// const users: Ref<IUser[]> = service.getUsers()
 
 const changeButtonState: ComputedRef<boolean> = computed(() => {
     return errors.value.length === 0;
@@ -19,21 +18,14 @@ const changeButtonState: ComputedRef<boolean> = computed(() => {
 
 const submit = async () => {
     clearErrors();
-
-    // let id;
-    // if (users.value.length > 0) {
-    //     id = users.value[users.value.length - 1].id + 1;
-    // } else {
-    //     id = 1;
-    // }
-
     const user = {
-        // id: id,
         name: name.value,
         email: email.value,
         password: password.value,
+        group: 'IDYGS82'
     };
     await service.createUser(user);
+    router.push('/home');
 }
 
 const validateForm = () => {
@@ -71,7 +63,6 @@ const clearErrors = () => {
 
 onMounted(() => {
     validateForm();
-    // await service.fetchAllUsers()
 });
 
 </script>

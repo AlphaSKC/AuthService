@@ -15,7 +15,7 @@ onMounted(async () => {
     <section>
         <ol class="list">
             <li v-for="(user, index) in users" :key="index">
-                <RouterLink :to="{ name: 'user', params: { id: user.id } }">
+                <RouterLink :to="{ name: 'user', params: { email: user.email } }">
                     {{ user.name }}
                 </RouterLink>
             </li>
