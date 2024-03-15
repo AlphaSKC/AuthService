@@ -24,7 +24,8 @@ const submit = async () => {
         password: password.value,
         group: 'IDYGS82'
     };
-    await service.createUser(user);
+    const response = await service.createUser(user);
+    console.log(response);
     router.push({ name: 'home' });
 }
 

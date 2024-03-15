@@ -16,18 +16,14 @@ const changeButtonState: ComputedRef<boolean> = computed(() => {
 
 const submit = async () => {
   clearErrors();
-  const keys = {
-    email: email.value,
-    password: password.value
+  const keys: Object = {
+    "email": email.value,
+    "password": password.value
   };
-  let response = await service.login(keys);
-  // if(response = true){
-  //     router.push('/home')
-  // }
-  // else{
-  //     errors.value.push({ field: 'fail', message: 'El correo no ha sido registrado o la contraseña es incorrecta' });
-  // }
-  console.log(response)
+  const response = await service.login(keys);
+  if (response == false) {
+    errors.value.push({ field: 'fail', message: 'Correo o contraseña incorrectos' });
+  }
 }
 
 const clearErrors = () => {

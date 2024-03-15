@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+
+const exit = () => {
+  localStorage.removeItem('token')
+}
 </script>
 
 <template>
@@ -23,7 +27,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </button>
           </RouterLink>
           <RouterLink :to="{ name: 'login' }">
-            <button data-content="Salir">
+            <button @click="exit()" data-content="Salir">
               Salir
             </button>
           </RouterLink>

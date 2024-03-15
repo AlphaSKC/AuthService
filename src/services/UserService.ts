@@ -1,7 +1,8 @@
 import type IUser from "@/interfaces/IUser"
+import router from "@/router"
 import { ref, type Ref } from "vue"
 
-const url = import.meta.env.VITE_API_URL || 'https://2d55-201-134-180-250.ngrok-free.app/'
+const url = import.meta.env.VITE_API_URL || 'http://utcancun.a.pinggy.online/'
 
 export default class UserService {
     private users: Ref<IUser[]>
@@ -54,8 +55,7 @@ export default class UserService {
             const json = await fetch(url+'register', {
                 method: 'POST',
                 headers: {
-                    'ngrok-skip-browser-warning': '0',
-                    'Content-Type': 'application/json; charset=UTF-8'
+                    'ngrok-skip-browser-warning': '0'
                 },
                 body: JSON.stringify(user)
             })
@@ -67,20 +67,31 @@ export default class UserService {
         }
     }
 
-    async login(keys: Object): Promise<void>{
+    async login(keys: Object): Promise<boolean>{
         try{
+            const requestBody = JSON.stringify(keys);
+            console.log('Request Body:', requestBody);
             const json = await fetch(url+'login',{
                 method: 'POST',
                 headers:{
+                    'Content-Type': 'application/json; charset=UTF-8',
                     'ngrok-skip-browser-warning': '0'
                 },
-                body:JSON.stringify(keys)
+                body:requestBody
             })
             const response = await json.json()
-            console.log(response)
+            console.log('Response:', response.token)
+            if(response.token != null){
+                localStorage.setItem('token', response.token)
+                router.push({name: 'home'})
+                return true
+            }else{
+                return false
+            }
         }
         catch(error){
-            console.log('Error login')    
+            console.log('Error login:', error)
+            return false    
         }
     }
 

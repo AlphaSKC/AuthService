@@ -25,7 +25,7 @@ onMounted(async () => {
                 </svg>
             </div>
             <p class="name-client"> {{ user.name }}
-                <span>{{ user.group }}
+                <span>{{ user.user_group }}
                 </span>
             </p>
             <p class="name-client"> Contacto:
